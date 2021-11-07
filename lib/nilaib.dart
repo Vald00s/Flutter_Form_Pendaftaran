@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:intl/intl.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -23,8 +25,6 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-enum gender { pria, wanita }
-
 class _HomeState extends State<Home> {
   //
   TextEditingController namac = TextEditingController();
@@ -33,7 +33,8 @@ class _HomeState extends State<Home> {
   DateTime selectedDate = DateTime.now();
   final firstDate = DateTime(2000, 1);
   final lastDate = DateTime(2021, 12);
-  gender? _pil3 = gender.pria;
+  String g = "Pria";
+
   bool value = false;
   bool value2 = false;
   bool value3 = false;
@@ -58,15 +59,40 @@ class _HomeState extends State<Home> {
   final TextEditingController tanggal_lahir = TextEditingController(
     text: '',
   );
-
+  String? fakultas;
+  String? prodi;
+  List _listfakultas = [
+    'F.Ekonomi',
+    'F.Teknik',
+    'F.Sosial Politik',
+    'F.Sastra',
+    'F.Hukum',
+    'F.Psikologi',
+  ];
+  List _myprodi = [
+    "Clara",
+    "John",
+    "Rizal",
+    "Steve",
+    "Laurel",
+    "Bernard",
+    "Miechel"
+  ];
   String? valueChoose;
+  //
+  //
+  void prod() {
+    if (fakultas == "F.Ekonomi") {}
+  }
 
+  //
+  //
   void ressets() {
     setState(() {
       nim.text = "";
       nama.text = "";
       alamat.text = "";
-      _pil3 = gender.pria;
+      g = "Pria";
       tanggal_lahir.text = "";
       value = false;
       value2 = false;
@@ -76,6 +102,8 @@ class _HomeState extends State<Home> {
       value6 = false;
       email.text = "";
       ipk.text = "";
+      fakultas = "F.Ekonomi";
+      prodi = "F.Ekonomi";
     });
   }
 
@@ -91,56 +119,67 @@ class _HomeState extends State<Home> {
           height: 300.0,
           child: Column(
             children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text('NIM: '),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text('Nama: '),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text("Alamat: "),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text("Gender: "),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text('Tanggal Lahir: '),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text('Hobby: '),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text("Email: "),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text("IPK: "),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text("Fakultas: "),
-              Padding(
-                  padding: EdgeInsets.only(
-                bottom: 10,
-              )),
-              Text("Prodi: "),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text('NIM: ' + nim.text),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text('Nama: ' + nama.text),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text("Alamat: " + alamat.text),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text("Gender: " + g),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text('Tanggal Lahir: ' +
+                      DateFormat.yMd().format(selectedDate)),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text('Hobby: '),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text("Email: " + email.text),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text("IPK: " + ipk.text),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text("Fakultas: "),
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 8)),
+              Row(
+                children: <Widget>[
+                  Text("Prodi: "),
+                ],
+              ),
             ],
           ),
         ),
@@ -293,11 +332,11 @@ class _HomeState extends State<Home> {
               ),
             ),
             Radio(
-              value: gender.pria,
-              groupValue: _pil3,
-              onChanged: (gender? value) {
+              value: "Pria",
+              groupValue: g,
+              onChanged: (String? value) {
                 setState(() {
-                  _pil3 = value!;
+                  g = value!;
                 });
               },
             ),
@@ -306,11 +345,11 @@ class _HomeState extends State<Home> {
               style: new TextStyle(fontSize: 17.0),
             ),
             Radio(
-              value: gender.wanita,
-              groupValue: _pil3,
-              onChanged: (gender? value) {
+              value: "Wanita",
+              groupValue: g,
+              onChanged: (String? value) {
                 setState(() {
-                  _pil3 = value!;
+                  g = value!;
                 });
               },
             ),
@@ -538,6 +577,104 @@ class _HomeState extends State<Home> {
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
                 ],
                 controller: ipk,
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(left: 8)),
+          ],
+        ),
+        Padding(padding: EdgeInsets.only(bottom: 5)),
+        Row(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.only(bottom: 20, left: 5)),
+            Container(
+              width: 100,
+              child: Text(
+                "Fakultas",
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            Container(
+              width: 120,
+              child: DropdownButton<String>(
+                value: fakultas,
+                style: TextStyle(color: Colors.black),
+                items: <String>[
+                  'F.Ekonomi',
+                  'F.Teknik',
+                  'F.Sosial Politik',
+                  'F.Sastra',
+                  'F.Hukum',
+                  'F.Psikologi',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                hint: Text(
+                  "Pilih",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 5,
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    fakultas = value!;
+                  });
+                },
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(left: 8)),
+          ],
+        ),
+        Padding(padding: EdgeInsets.only(bottom: 5)),
+        Row(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.only(bottom: 20, left: 5)),
+            Container(
+              width: 100,
+              child: Text(
+                "Prodi",
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            Container(
+              width: 120,
+              child: DropdownButton<String>(
+                value: prodi,
+                style: TextStyle(color: Colors.black),
+                items: <String>[
+                  'F.Ekonomi',
+                  'F.Teknik',
+                  'F.Sosial Politik',
+                  'F.Sastra',
+                  'F.Hukum',
+                  'F.Psikologi',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                hint: Text(
+                  "Pilih",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 5,
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    prodi = value!;
+                  });
+                },
               ),
             ),
             Padding(padding: EdgeInsets.only(left: 8)),
