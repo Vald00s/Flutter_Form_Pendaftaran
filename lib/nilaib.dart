@@ -59,7 +59,6 @@ class _HomeState extends State<Home> {
     text: '',
   );
 
-  String? _chosenValue = "Biasa";
   String? valueChoose;
 
   void ressets() {
