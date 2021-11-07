@@ -1,8 +1,6 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,8 +36,6 @@ class _HomeState extends State<Home> {
   final lastDate = DateTime(2021, 12);
   Harilibur? _pil = Harilibur.tidak;
   Saudara? _pil2 = Saudara.tidak;
-  bool? _harilibur = false;
-  bool? _saudara = false;
   bool value = false;
   bool value2 = false;
   bool value3 = false;
@@ -148,6 +144,8 @@ class _HomeState extends State<Home> {
     kembaliant.text = j.toString();
   }
 
+  void proses() {}
+
   void ressets() {
     setState(() {
       nota.text = "";
@@ -166,6 +164,85 @@ class _HomeState extends State<Home> {
       dibayar.text = "";
       kembaliant.text = "";
     });
+  }
+
+  void coba() {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text(
+          'Data Mahasiswa',
+          textAlign: TextAlign.center,
+        ),
+        content: SizedBox(
+          height: 300.0,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text('NIM: '),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text('Nama: '),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text("Alamat: "),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text("Gender: "),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text('Tanggal Lahir: '),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text('Hobby: '),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text("Email: "),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text("IPK: "),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text("Fakultas: "),
+              Padding(
+                  padding: EdgeInsets.only(
+                bottom: 10,
+              )),
+              Text("Prodi: "),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -730,6 +807,7 @@ class _HomeState extends State<Home> {
               child: Text("Proses"),
               onPressed: () {
                 ppn();
+                coba();
               },
             ),
           ),
