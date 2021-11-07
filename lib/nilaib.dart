@@ -34,7 +34,6 @@ class _HomeState extends State<Home> {
   final firstDate = DateTime(2000, 1);
   final lastDate = DateTime(2021, 12);
   String g = "Pria";
-
   bool value = false;
   bool value2 = false;
   bool value3 = false;
@@ -61,7 +60,7 @@ class _HomeState extends State<Home> {
   );
   String? fakultas;
   String? prodi;
-  List _listfakultas = [
+  List<String> _listfakultas = [
     'F.Ekonomi',
     'F.Teknik',
     'F.Sosial Politik',
@@ -69,14 +68,39 @@ class _HomeState extends State<Home> {
     'F.Hukum',
     'F.Psikologi',
   ];
-  List _myprodi = [
-    "Clara",
-    "John",
-    "Rizal",
-    "Steve",
-    "Laurel",
-    "Bernard",
-    "Miechel"
+  List<String> _prodteknik = [
+    "Teknik Industri (S1).",
+    "Teknik Sipil (S1).",
+    "Teknik Mesin (S1).",
+    "Teknik Arsitektur (S1).",
+    "Teknik Elektro (S1).",
+    "Teknik Informatika (S1).",
+    "Magister Teknik (S2)."
+  ];
+  List<String> _prodekonomi = [
+    "Ekonomi Manajemen (S1).",
+    "Ekonomi Akuntansi (S1).",
+    "Ekonomi Pembangunan (S1).",
+    "Magister Manajemen (S2).",
+    "Doktor Ilmu Ekonomi (S3)."
+  ];
+  List<String> _prodsosopol = [
+    "Administrasi Negara (S1)",
+    "Administrasi Niaga (S1)",
+    "Ilmu Komunikasi (S1)",
+    "Magister Administrasi (S2)",
+    "Doktor Ilmu Administrasi (S3)"
+  ];
+  List<String> _prodsastra = ["Sastra Jepang (S1).", "Sastra Inggris (S1)."];
+  List<String> _prodhukum = [
+    "Ilmu Hukum (S1).",
+    "Magister Ilmu Hukum (S2).",
+    "Doktor Ilmu Hukum (S3)."
+  ];
+  List<String> _prodpsikologi = [
+    "Psikologi (S1).",
+    "Psikologi Jenjang Profesi (S2).",
+    "Magister Psikologi (S2)."
   ];
   String? valueChoose;
   //
@@ -102,8 +126,8 @@ class _HomeState extends State<Home> {
       value6 = false;
       email.text = "";
       ipk.text = "";
-      fakultas = "F.Ekonomi";
-      prodi = "F.Ekonomi";
+      fakultas = _listfakultas[0];
+      prodi = _prodteknik[0];
     });
   }
 
@@ -601,21 +625,14 @@ class _HomeState extends State<Home> {
               child: DropdownButton<String>(
                 value: fakultas,
                 style: TextStyle(color: Colors.black),
-                items: <String>[
-                  'F.Ekonomi',
-                  'F.Teknik',
-                  'F.Sosial Politik',
-                  'F.Sastra',
-                  'F.Hukum',
-                  'F.Psikologi',
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
+                items: _listfakultas.map((String? value) {
+                  return DropdownMenuItem(
+                    child: Text(value!),
                     value: value,
-                    child: Text(value),
                   );
                 }).toList(),
                 hint: Text(
-                  "Pilih",
+                  " ",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 5,
@@ -646,25 +663,18 @@ class _HomeState extends State<Home> {
               ),
             ),
             Container(
-              width: 120,
+              width: 180,
               child: DropdownButton<String>(
                 value: prodi,
                 style: TextStyle(color: Colors.black),
-                items: <String>[
-                  'F.Ekonomi',
-                  'F.Teknik',
-                  'F.Sosial Politik',
-                  'F.Sastra',
-                  'F.Hukum',
-                  'F.Psikologi',
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
+                items: _prodteknik.map((String? value) {
+                  return DropdownMenuItem(
+                    child: Text(value!),
                     value: value,
-                    child: Text(value),
                   );
                 }).toList(),
                 hint: Text(
-                  "Pilih",
+                  " ",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 5,
