@@ -1,10 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
 import 'package:intl/intl.dart';
+
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,6 +28,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String? imageLink;
+  File? _image;
   //
   TextEditingController namac = TextEditingController();
   TextEditingController nimc = TextEditingController();
@@ -304,12 +308,59 @@ class _HomeState extends State<Home> {
             Padding(padding: EdgeInsets.only(left: 10)),
             Container(
               width: 100,
-              height: 100,
-              decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                image: new AssetImage("assets/images/Ellipse1.png"),
-                fit: BoxFit.fill,
-              )),
+              height: 150,
+              child: Column(
+                children: <Widget>[
+                  //just for spacing
+
+                  imageLink != null
+                      ? CircleAvatar(
+                          child: ClipOval(
+                            child: Image.network(imageLink!),
+                          ),
+                          radius: 40,
+                        )
+                      : CircleAvatar(
+                          child: ClipOval(
+                            child: Icon(
+                              Icons.person,
+                              size: 40,
+                            ),
+                          ),
+                          radius: 40,
+                        ),
+                  FlatButton(
+                    child: Text(
+                      "Change Image",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    onPressed: () async {
+                      _image = (await ImagePicker.pickImage(
+                          source: ImageSource.gallery)) as File?;
+                      FirebaseStorage fs = FirebaseStorage.instance;
+                      StorageReference rootReference = fs.ref();
+                      StorageReference pictureFolderRef =
+                          rootReference.child("pictures").child("image");
+                      pictureFolderRef
+                          .putFile(_image)
+                          .onComplete
+                          .then((storageTask) async {
+                        String link = await storageTask.ref.getDownloadURL();
+                        print("uploaded");
+                        setState(() {
+                          imageLink = link;
+                        });
+                      });
+                    },
+                    color: Colors.green,
+                    textColor: Colors.white,
+                  )
+                  //
+                  //
+                  //
+                  //
+                ],
+              ),
             ),
           ],
         ),
