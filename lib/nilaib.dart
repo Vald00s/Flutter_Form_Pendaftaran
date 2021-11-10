@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -148,6 +149,11 @@ class _HomeState extends State<Home> {
           child: Column(
             children: <Widget>[
               Padding(padding: EdgeInsets.only(bottom: 8)),
+              Column(
+                children: <Widget>[
+                  Text('Foto: '),
+                ],
+              ),
               Row(
                 children: <Widget>[
                   Text('NIM: ' + nim.text),
