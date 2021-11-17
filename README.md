@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://flutter.dev/assets/images/shared/brand/flutter/logo/flutter-lockup.png" width="400"></a></p>
+<p align="center"><a href="https://flutter.dev/" target="_blank"><img src="https://storage.googleapis.com/cms-storage-bucket/ec64036b4eacc9f3fd73.svg" width="400"></a></p>
 
 
 # Form_Pendaftaran_Mahasiswa
